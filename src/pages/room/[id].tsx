@@ -97,7 +97,7 @@ const Messages: FC<{ messages: Message[] }> = ({ messages }) => {
       {messages.map((msg, i) => {
         if (msg.author == "Noodle") {
           return (
-            <div key={i} className="px-2 py-1 text-sm font-bold text-zinc-900 break-all border-b border-black">
+            <div key={i} className="px-2 py-1 text-sm font-bold break-all border-b border-black text-zinc-900">
               {msg.content}
             </div>
           );
@@ -117,7 +117,7 @@ const Messages: FC<{ messages: Message[] }> = ({ messages }) => {
 };
 
 type User = { name: string | null; color: string };
-export default function Home() {
+export default function Room() {
   const [users, setUsers] = useState(0);
   const [user, setUser] = useState<User>({ name: null, color: "text-white" });
   const [messages, setMessages] = useState<Array<Message>>([]);
@@ -184,13 +184,13 @@ export default function Home() {
   };
 
   return (
-    <div className="flex font-mono items-center justify-center min-h-screen p-4 mx-auto bg-gradient-to-br from-zinc-500 to-rose-500">
+    <div className="flex items-center justify-center min-h-screen p-4 mx-auto font-mono bg-gradient-to-br from-zinc-500 to-rose-500">
       <main className="flex flex-col items-center justify-center w-full h-full gap-4">
         {!user.name ? (
           <UserDetails setUser={setUser} />
         ) : (
           <>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col items-center justify-center">
               <div className="flex flex-wrap gap-4 px-8 text-xl font-bold text-white">
                 <span className="w-max">Room Code: {router.query.id}</span>
                 <span
@@ -207,12 +207,12 @@ export default function Home() {
                 </span>
               </div>
             </div>
-            <div className="overflow-auto flex bg-transparent border-black/25 border-solid border-2 flex-col-reverse h-[20rem] max-w-[300px] rounded-md shadow-md">
+            <div className="overflow-auto flex bg-transparent border-black/25 border-solid border-2 flex-col-reverse h-[20rem] min-w-full sm:min-w-[300px] max-w-[50%] rounded-md shadow-md">
               <Messages messages={messages} />
               <SendMessage author={user} room={router.query.id as string} sendMessage={sendMessage} />
             </div>
             <button
-              className="px-8 py-2 bg-transparent border-solid border-black/25 border-2 text-white rounded drop-shadow-md hover:filter-none focus:filter-none hover:shadow-inner focus:shadow-inner"
+              className="px-8 py-2 text-white bg-transparent border-2 border-solid rounded border-black/25 drop-shadow-md hover:filter-none focus:filter-none hover:shadow-inner focus:shadow-inner hover:bg-white focus:bg-white hover:text-rose-900 focus:text-rose-900"
               onClick={leaveRoom}
             >
               Leave
