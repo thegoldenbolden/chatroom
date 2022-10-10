@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { io } from "socket.io-client";
-import { createRoom } from "./lib/createRoom";
+import { createRoom } from "../lib/createRoom";
 
 const Home = () => {
   const router = useRouter();
